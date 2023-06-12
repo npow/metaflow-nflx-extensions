@@ -428,6 +428,8 @@ def auth_from_urls(urls: List[str]) -> Optional[AuthBase]:
     }
 
     for url in urls:
+        if url.startswith("'") and url.endswith("'"):
+            url = url[1:-1]
         up = urlparse(url)
         if up.hostname and up.username:
             auths_per_hostname[up.hostname] = HTTPBasicAuth(
